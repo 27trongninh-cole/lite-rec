@@ -1,44 +1,19 @@
-name: Build Test APK
-
+name: build
 on:
+  workflow_dispatch:
   push:
-    branches: [ main ]
-  workflow_dispatch: {}
-
+    branches: [main]
+permissions:
+  contents: write
 jobs:
-  build:
+  apk:
     runs-on: ubuntu-latest
     steps:
-      - name: Checkout repo
-        uses: actions/checkout@v4
-
-      - name: Setup JDK
-        uses: actions/setup-java@v4
-        with:
-          distribution: 'temurin'
-          java-version: '17'
-
-      - name: Setup Android SDK
-        uses: android-actions/setup-android@v3
-
-      - name: Grant execute permission for gradlew
-        run: chmod +x gradlew || true
-
-      - name: Build debug APK
+      - uses: actions/checkout@v4
+      - run: bash build.sh
+      - name: Publish release
+        env:
+          GH_TOKEN: ${{ github.token }}
         run: |
-          gradle wrapper --gradle-version 8.7 || true
-          if [ -f gradlew ]; then ./gradlew assembleDebug --no-daemon --stacktrace
-          else gradle assembleDebug --no-daemon --stacktrace; fi
-
-      - name: Rename APK
-        run: |
-          find . -name "*.apk"
-          mkdir -p out
-          cp app/build/outputs/apk/debug/app-debug.apk out/W2WTest-debug.apk
-
-      - name: Upload APK
-        uses: actions/upload-artifact@v4
-        with:
-          name: w2wtest-apk
-          path: out/W2WTest-debug.apk
-          retention-days: 14
+          gh release delete latest --yes --cleanup-tag 2>/dev/null || true
+          gh release create latest out/app.apk --title "Lite Rec" --notes "build ${GITHUB_SHA::7}"
