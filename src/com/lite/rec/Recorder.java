@@ -34,9 +34,9 @@ import java.util.Locale;
  */
 final class Recorder {
     // ---- Chất lượng (giống repo cũ: cạnh dài 1920, 14 Mbps VBR, 30 fps, keyframe 1s) ----
-    static final int LONG_SIDE = 1920;
+    static final int LONG_SIDE = 2160;
     static final int FPS = 30;
-    static final int VIDEO_BPS = 14_000_000;
+    static final int VIDEO_BPS = 16_000_000;
     static final int KEY_INTERVAL_S = 1;
     // ---- Âm thanh ----
     static final int RATE = 48000;

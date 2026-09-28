@@ -63,7 +63,7 @@ public class MainActivity extends Activity {
                 + "• Tiết kiệm pin: Không hạn chế\n"
                 + "• Quyền khác: bật \"Hiển thị cửa sổ bật lên khi chạy ở nền\"\n\n"
                 + "Cách dùng: bấm BẬT bong bóng, chọn \"Toàn màn hình\", rồi vào game. "
-                + "Chạm bong bóng để ghi, chạm lần nữa để dừng — video lưu vào Movies/.");
+                + "Chạm bong bóng để ghi (máy rung nhẹ, bong bóng sẽ TÀNG HÌNH), chạm đúng vị trí cũ hoặc nút Dừng trong thông báo để dừng — video lưu vào Movies/. Nên đặt bong bóng ở góc không có nút bấm của game.");
         root.addView(hint);
 
         ScrollView sv = new ScrollView(this);

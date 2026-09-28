@@ -325,11 +325,7 @@ public class BubbleService extends Service {
         @Override protected void onDraw(Canvas c) {
             float r = getWidth() / 2f;
             if (st == REC) {
-                p.setColor(0xB3E53935);
-                c.drawCircle(r, r, r, p);
-                p.setColor(0xFFFFFFFF);
-                float q = r * 0.4f;
-                c.drawRoundRect(r - q, r - q, r + q, r + q, q * 0.25f, q * 0.25f, p);
+                return; // tàng hình khi đang ghi để không lọt vào video; vẫn nhận chạm để dừng
             } else if (st == READY) {
                 p.setColor(0xCC1E1E1E);
                 c.drawCircle(r, r, r, p);
